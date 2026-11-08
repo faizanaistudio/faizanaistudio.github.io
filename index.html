@@ -4,170 +4,64 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA AI STUDIO - Free AI Image Generator</title>
-<meta name="description" content="Create AI images from your text prompts with NOVA AI STUDIO. Turn your ideas into beautiful images using AI.">
-<meta name="robots" content="index,follow">
+<meta name="description" content="NOVA AI STUDIO - Create beautiful AI images from text.">
+<meta name="theme-color" content="#101114">
+<title>NOVA AI STUDIO | Free AI Image Generator</title>
 
-<!-- Google AdSense verification code -->
-<script async
-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8403545021923367"
-crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8403545021923367" crossorigin="anonymous"></script>
 
 <style>
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
- margin:0;
- font-family:Arial,Helvetica,sans-serif;
- background:#101114;
- color:#f5f5f5;
- line-height:1.6
-}
-header{
- background:#17181d;
- border-bottom:1px solid #303139;
- padding:15px 5%;
- display:flex;
- justify-content:space-between;
- align-items:center;
- flex-wrap:wrap;
- gap:12px
-}
+body{margin:0;background:#101114;color:#f5f5f5;font-family:Arial,sans-serif;line-height:1.6}
+header{background:#17181d;border-bottom:1px solid #303139;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
 .logo{font-size:23px;font-weight:800;letter-spacing:1px}
 .logo span{color:#a78bfa}
-nav{display:flex;gap:17px;flex-wrap:wrap}
-nav a,.footer-links a{
- color:#c4c4cc;text-decoration:none;font-size:13px
-}
-nav a:hover,.footer-links a:hover{color:#b99bff}
+nav{display:flex;gap:18px;flex-wrap:wrap}
+nav a,footer a{color:#c4c4cc;text-decoration:none;font-size:13px}
+nav a:hover,footer a:hover{color:#b99bff}
 main{width:min(950px,92%);margin:45px auto}
 .hero{text-align:center;margin-bottom:30px}
 .hero h1{font-size:36px;line-height:1.2;margin:0 0 12px}
-.hero p{color:#aaa;margin:0}
-.panel{
- background:#191a20;
- border:1px solid #303139;
- border-radius:15px;
- padding:24px
-}
-label{display:block;font-weight:bold;font-size:14px;margin-bottom:9px}
-textarea,select{
- width:100%;
- background:#111216;
- color:white;
- border:1px solid #41414a;
- border-radius:9px;
- padding:14px;
- font-size:15px;
- outline:none
-}
-textarea{min-height:125px;resize:vertical;line-height:1.6}
-textarea:focus,select:focus{border-color:#a78bfa}
-.options{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:15px;
- margin-top:18px
-}
-button{
- cursor:pointer;
- border:0;
- border-radius:9px;
- font-weight:bold;
- padding:14px 18px
-}
-.generate{
- width:100%;
- margin-top:20px;
- background:#8b65df;
- color:white;
- font-size:16px
-}
+.hero p{color:#aaa}
+.panel,.info{background:#191a20;border:1px solid #303139;border-radius:15px;padding:24px}
+label{display:block;font-weight:bold;font-size:14px;margin:12px 0 9px}
+textarea,select{width:100%;background:#111216;color:white;border:1px solid #41414a;border-radius:9px;padding:14px;font-size:15px}
+textarea{min-height:130px;resize:vertical;line-height:1.6}
+textarea:focus,select:focus{outline:1px solid #a78bfa}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:12px}
+button{cursor:pointer;border:0;border-radius:9px;font-weight:bold;padding:14px 18px}
+.generate{width:100%;margin-top:20px;background:#8b65df;color:white;font-size:16px}
 .generate:hover{background:#9a78e8}
 .generate:disabled{opacity:.6;cursor:wait}
-.status{text-align:center;color:#c7afff;margin-top:15px}
+.status{text-align:center;color:#c7afff;margin-top:15px;overflow-wrap:anywhere}
 .result{display:none;margin-top:24px}
-.result img{
- width:100%;
- border-radius:11px;
- border:1px solid #444
-}
-.download{
- display:block;
- text-align:center;
- padding:13px;
- margin-top:13px;
- background:#30273e;
- color:white;
- text-decoration:none;
- border-radius:9px;
- font-weight:bold
-}
-.ad-area{
- min-height:90px;
- margin:25px 0;
- padding:15px;
- border:1px dashed #45454d;
- border-radius:9px;
- display:flex;
- align-items:center;
- justify-content:center;
- color:#777;
- font-size:12px
-}
+.result img{width:100%;border-radius:11px;border:1px solid #444}
+.download{display:block;text-align:center;padding:13px;margin-top:13px;background:#30273e;color:white;text-decoration:none;border-radius:9px;font-weight:bold}
+.ad-area{min-height:90px;margin:25px 0;padding:15px;border:1px dashed #45454d;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#777;font-size:12px}
 .section{margin-top:45px}
 .section h2{font-size:23px}
-.section p,.section li{color:#bcbcc4}
-.gallery{
- display:grid;
- grid-template-columns:repeat(4,1fr);
- gap:12px
-}
-.gallery img{
- width:100%;
- aspect-ratio:1;
- object-fit:cover;
- border-radius:9px;
- cursor:pointer;
- border:1px solid #383840
-}
-.info{
- background:#191a20;
- border:1px solid #303139;
- padding:22px;
- border-radius:12px;
- margin-top:18px
-}
-footer{
- border-top:1px solid #303139;
- padding:30px 5%;
- text-align:center;
- color:#888;
- font-size:13px
-}
-.footer-links{
- display:flex;
- justify-content:center;
- flex-wrap:wrap;
- gap:18px;
- margin-bottom:15px
-}
+.section p,.section li,.muted{color:#bcbcc4}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.gallery img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:9px;cursor:pointer;border:1px solid #383840}
+.info{margin-top:18px}
+footer{border-top:1px solid #303139;padding:30px 5%;text-align:center;color:#888;font-size:13px}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-bottom:15px}
 @media(max-width:600px){
- header{padding:14px 4%}
- .logo{font-size:19px}
- nav{gap:12px}
- nav a{font-size:12px}
- main{margin:30px auto}
- .hero h1{font-size:28px}
- .panel{padding:16px}
- .options{grid-template-columns:1fr}
- .gallery{grid-template-columns:repeat(2,1fr)}
+header{padding:14px 4%}
+.logo{font-size:19px}
+nav{gap:12px}
+nav a{font-size:12px}
+main{margin:30px auto}
+.hero h1{font-size:28px}
+.panel,.info{padding:16px}
+.options{grid-template-columns:1fr}
+.gallery{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
 
 <body>
-
 <header>
  <div class="logo">NOVA <span>AI STUDIO</span></div>
  <nav>
@@ -179,25 +73,19 @@ footer{
 </header>
 
 <main>
-
 <section class="hero">
  <h1>Turn Your Imagination Into Images</h1>
  <p>Create beautiful AI images simply by describing your idea.</p>
 </section>
 
-<div class="ad-area">
- Advertisement
-</div>
+<div class="ad-area">Advertisement</div>
 
 <section class="panel" id="generator">
  <h2>Create Your AI Image</h2>
- <p style="color:#aaa;font-size:14px">
-  Describe the image you want to create. Be specific about the subject, background, lighting and style.
- </p>
+ <p class="muted">Describe your idea, select a style and create your image.</p>
 
  <label for="prompt">Your Image Description</label>
- <textarea id="prompt" maxlength="2048"
- placeholder="Example: A peaceful mountain village at sunrise, beautiful green hills, realistic photography, soft golden light..."></textarea>
+ <textarea id="prompt" maxlength="2048" placeholder="Example: A beautiful futuristic city at sunset, cinematic lighting, ultra realistic photography..."></textarea>
 
  <div class="options">
   <div>
@@ -213,7 +101,6 @@ footer{
     <option value="fantasy concept art">Fantasy</option>
    </select>
   </div>
-
   <div>
    <label for="quality">Generation Quality</label>
    <select id="quality">
@@ -224,124 +111,64 @@ footer{
   </div>
  </div>
 
- <button class="generate" id="generateBtn" onclick="generateImage()">
-  ✨ Generate Image
- </button>
-
+ <button class="generate" id="generateBtn" onclick="generateImage()">✨ Generate Image</button>
  <div class="status" id="status" aria-live="polite"></div>
 
  <div class="result" id="result">
   <img id="outputImage" alt="AI generated image">
-  <a class="download" id="downloadBtn" download="nova-ai-image.jpg">
-   Download Image
-  </a>
+  <a class="download" id="downloadBtn" download="nova-ai-image.jpg">Download Image</a>
  </div>
 </section>
 
-<div class="ad-area">
- Advertisement
-</div>
+<div class="ad-area">Advertisement</div>
 
 <section class="section">
  <h2>Recent Creations</h2>
- <p style="color:#aaa;font-size:14px">
-  Your recent images are saved locally in this browser.
- </p>
+ <p class="muted">Your recent images are saved in this browser.</p>
  <div class="gallery" id="gallery"></div>
 </section>
 
 <section class="section info" id="about">
  <h2>About NOVA AI STUDIO</h2>
- <p>
-  NOVA AI STUDIO is an online text-to-image tool designed to help people
-  turn written ideas into visual creations. Users can describe a scene,
-  choose an image style and generate an image using artificial intelligence.
- </p>
- <p>
-  Our goal is to make AI image creation simple and accessible.
-  The tool is designed for beginners, creators, students and anyone
-  interested in exploring creative ideas.
- </p>
- <p>
-  Image generation is provided through an external AI service.
-  Availability and usage may depend on the service's limits.
- </p>
+ <p>NOVA AI STUDIO is an online text-to-image tool that helps people turn written ideas into visual creations using artificial intelligence.</p>
+ <p>Our goal is to make AI image creation simple and accessible for creators, students and beginners.</p>
+ <p>Image generation is provided through an external AI service. Availability and usage may depend on service limits.</p>
 </section>
 
 <section class="section info" id="privacy">
  <h2>Privacy Policy</h2>
  <p><strong>Last updated: November 8, 2026</strong></p>
- <p>
-  NOVA AI STUDIO respects the privacy of its visitors.
-  This website provides a text-to-image generation service.
- </p>
- <h3>Information and prompts</h3>
- <p>
-  When you generate an image, the text prompt you submit is sent
-  to our AI service provider to process your request.
-  Do not submit passwords, private information or sensitive personal data.
- </p>
+ <h3>Prompts and information</h3>
+ <p>When you generate an image, your text prompt is sent to our AI service provider for processing. Do not submit passwords or sensitive personal information.</p>
  <h3>Local storage</h3>
- <p>
-  Recent generated images may be stored in your browser's local storage
-  to display your recent creations. This information is stored on your
-  device and can be cleared through your browser settings.
- </p>
+ <p>Recent images may be stored in your browser to display your gallery. You can clear this data through your browser settings.</p>
  <h3>Cookies and advertising</h3>
- <p>
-  Google and other advertising partners may use cookies or similar
-  technologies to serve and measure advertisements, subject to their
-  policies and your applicable privacy choices.
- </p>
- <p>
-  Google advertising information:
-  <a href="https://policies.google.com/technologies/ads"
-  target="_blank" rel="noopener">Google Advertising Policies</a>.
- </p>
+ <p>Google and other advertising partners may use cookies or similar technologies to serve and measure advertisements, subject to their policies and applicable privacy choices.</p>
+ <p><a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google Advertising Policies</a></p>
  <h3>Third-party services</h3>
- <p>
-  This website uses third-party AI and hosting services.
-  Their own privacy policies and terms may also apply.
- </p>
+ <p>This website uses third-party AI and hosting services. Their privacy policies may also apply.</p>
  <h3>Contact</h3>
- <p>
-  For privacy questions, please use the contact information provided
-  in the Contact section of this website.
- </p>
+ <p>Contact the website owner through the GitHub profile linked below.</p>
 </section>
 
 <section class="section info" id="terms">
  <h2>Terms of Use</h2>
- <p>
-  By using NOVA AI STUDIO, you agree to use the service lawfully
-  and responsibly.
- </p>
  <ul>
-  <li>Do not use the service to create illegal or harmful content.</li>
-  <li>Do not attempt to disrupt or misuse the website or its services.</li>
-  <li>AI-generated results may not always be accurate or suitable for every purpose.</li>
-  <li>Service availability and free usage limits may change.</li>
+  <li>Use the service lawfully and responsibly.</li>
+  <li>Do not create illegal or harmful content.</li>
+  <li>Do not misuse or disrupt the website.</li>
+  <li>AI-generated results may contain errors.</li>
   <li>You are responsible for how you use and share generated images.</li>
+  <li>Usage limits and availability may change.</li>
  </ul>
- <p>
-  The service is provided without a guarantee of uninterrupted availability.
- </p>
+ <p>The service is provided without a guarantee of uninterrupted availability.</p>
 </section>
 
 <section class="section info" id="contact">
  <h2>Contact NOVA AI STUDIO</h2>
- <p>
-  For questions, feedback or support, you can contact the website owner
-  through the official GitHub profile.
- </p>
- <p>
-  <a href="https://github.com/faizanaistudio"
-  target="_blank" rel="noopener" style="color:#b99bff">
-  Contact / GitHub Profile
-  </a>
- </p>
+ <p>For questions, feedback or support, contact us through our GitHub profile.</p>
+ <p><a href="https://github.com/faizanaistudio" target="_blank" rel="noopener">GitHub Profile</a></p>
 </section>
-
 </main>
 
 <footer>
@@ -355,38 +182,33 @@ footer{
 </footer>
 
 <script>
-const API_URL =
- "https://nova-ai-backend.zitband1.workers.dev/generate";
-
-const promptInput = document.getElementById("prompt");
-const styleInput = document.getElementById("style");
-const qualityInput = document.getElementById("quality");
-const statusBox = document.getElementById("status");
-const generateBtn = document.getElementById("generateBtn");
-const resultBox = document.getElementById("result");
-const outputImage = document.getElementById("outputImage");
-const downloadBtn = document.getElementById("downloadBtn");
-const gallery = document.getElementById("gallery");
+const API_URL="https://nova-ai-backend.zitband1.workers.dev/generate";
+const promptInput=document.getElementById("prompt");
+const styleInput=document.getElementById("style");
+const qualityInput=document.getElementById("quality");
+const statusBox=document.getElementById("status");
+const generateBtn=document.getElementById("generateBtn");
+const resultBox=document.getElementById("result");
+const outputImage=document.getElementById("outputImage");
+const downloadBtn=document.getElementById("downloadBtn");
+const gallery=document.getElementById("gallery");
 
 async function generateImage(){
- const prompt = promptInput.value.trim();
-
+ const prompt=promptInput.value.trim();
  if(!prompt){
-  statusBox.textContent = "Please describe your image first.";
+  statusBox.textContent="Please describe your image first.";
   promptInput.focus();
   return;
  }
 
- const style = styleInput.value;
- const finalPrompt = style ? prompt + ", " + style : prompt;
-
- generateBtn.disabled = true;
- generateBtn.textContent = "Creating your image...";
- statusBox.textContent = "Please wait. Your image is being created.";
- resultBox.style.display = "none";
+ const finalPrompt=styleInput.value?prompt+", "+styleInput.value:prompt;
+ generateBtn.disabled=true;
+ generateBtn.textContent="Creating your image...";
+ statusBox.textContent="Please wait. Your image is being created.";
+ resultBox.style.display="none";
 
  try{
-  const response = await fetch(API_URL,{
+  const response=await fetch(API_URL,{
    method:"POST",
    headers:{"Content-Type":"application/json"},
    body:JSON.stringify({
@@ -395,77 +217,59 @@ async function generateImage(){
    })
   });
 
-  const data = await response.json();
-
-  if(!response.ok || !data.success || !data.dataURI){
-   throw new Error(data.error || "Image generation failed.");
+  const data=await response.json();
+  if(!response.ok||!data.success||!data.dataURI){
+   throw new Error(data.error||"Image generation failed.");
   }
 
-  outputImage.src = data.dataURI;
-  downloadBtn.href = data.dataURI;
-  resultBox.style.display = "block";
-  statusBox.textContent = "Your image is ready!";
-
+  outputImage.src=data.dataURI;
+  downloadBtn.href=data.dataURI;
+  resultBox.style.display="block";
+  statusBox.textContent="Your image is ready!";
   saveImage(data.dataURI);
 
  }catch(error){
-  statusBox.textContent = "Error: " + error.message;
+  statusBox.textContent="Error: "+error.message;
  }finally{
-  generateBtn.disabled = false;
-  generateBtn.textContent = "✨ Generate Image";
+  generateBtn.disabled=false;
+  generateBtn.textContent="✨ Generate Image";
  }
 }
 
 function saveImage(image){
  try{
-  let images = JSON.parse(
-   localStorage.getItem("novaGallery") || "[]"
-  );
-
+  let images=JSON.parse(localStorage.getItem("novaGallery")||"[]");
   images.unshift(image);
-  images = images.slice(0,2);
-
+  images=images.slice(0,2);
   localStorage.setItem("novaGallery",JSON.stringify(images));
   renderGallery();
-
  }catch(error){
-  statusBox.textContent =
-   "Image created. Please download it to keep a copy.";
+  statusBox.textContent="Image created. Please download it to keep a copy.";
  }
 }
 
 function renderGallery(){
  try{
-  const images = JSON.parse(
-   localStorage.getItem("novaGallery") || "[]"
-  );
-
-  gallery.innerHTML = "";
-
+  const images=JSON.parse(localStorage.getItem("novaGallery")||"[]");
+  gallery.innerHTML="";
   images.forEach(src=>{
-   const img = document.createElement("img");
-   img.src = src;
-   img.alt = "Previous AI creation";
-
-   img.onclick = ()=>{
-    outputImage.src = src;
-    downloadBtn.href = src;
-    resultBox.style.display = "block";
-    statusBox.textContent = "Previous image opened.";
-    document.getElementById("generator").scrollIntoView({
-     behavior:"smooth"
-    });
+   const img=document.createElement("img");
+   img.src=src;
+   img.alt="Previous AI creation";
+   img.onclick=()=>{
+    outputImage.src=src;
+    downloadBtn.href=src;
+    resultBox.style.display="block";
+    statusBox.textContent="Previous image opened.";
+    document.getElementById("generator").scrollIntoView({behavior:"smooth"});
    };
-
    gallery.appendChild(img);
   });
  }catch(error){
-  gallery.innerHTML = "";
+  gallery.innerHTML="";
  }
 }
-
 renderGallery();
 </script>
-
 </body>
 </html>
