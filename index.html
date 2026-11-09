@@ -14,7 +14,7 @@ button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 .app{display:flex;min-height:100vh}
 .sidebar{width:245px;background:#0d1017;border-right:1px solid var(--line);padding:25px 16px;position:fixed;top:0;bottom:0;left:0;display:flex;flex-direction:column;z-index:5}
-.brand{font-size:22px;font-weight:900;letter-spacing:1px;padding:5px 10px 30px}
+.brand{font-size:22px;font-weight:900;letter-spacing:1px;padding:5px 10px 30px;border:0;background:transparent;color:inherit;text-align:left;cursor:pointer;width:100%}.brand:hover{filter:brightness(1.2)}
 .brand span{color:var(--orange)}
 .brand small{display:block;font-size:9px;letter-spacing:4px;color:var(--muted);margin-top:5px}
 .nav-label{color:#687386;font-size:10px;letter-spacing:2px;padding:12px}
@@ -133,7 +133,7 @@ textarea{min-height:110px;resize:vertical;line-height:1.6}
 <body>
 <div class="app">
 <aside class="sidebar" id="sidebar">
-  <div class="brand">NOVA<span>AI</span><small>FILM STUDIO</small></div>
+  <button class="brand" type="button" onclick="showPage('home')" aria-label="Go to home" title="Go to Home">NOVA<span>AI</span><small>FILM STUDIO</small></button>
   <div class="nav-label">WORKSPACE</div>
   <nav class="nav">
     <button class="active" data-page="home">⌂ &nbsp; Dashboard</button>
@@ -312,6 +312,9 @@ textarea{min-height:110px;resize:vertical;line-height:1.6}
   <h1>My Library</h1>
   <p class="description">Your saved AI image creations on this browser.</p>
   <div class="panel">
+    <label for="librarySearch">Search your creations</label>
+    <input id="librarySearch" type="search" placeholder="Search by prompt or date..." oninput="renderGallery()">
+    <p id="libraryCount" class="description" style="margin:10px 0 15px"></p>
     <div class="gallery" id="gallery"></div>
     <p id="emptyLibrary" class="description">No saved images yet. Create your first image!</p>
   </div>
@@ -609,6 +612,7 @@ referenceInput.addEventListener("change",()=>{
 });
 
 let currentImage="";
+let currentImagePrompt="";
 async function generateCharacter(){
   const prompt=document.getElementById("charScenePrompt").value.trim();
   const btn=document.getElementById("characterGenerateBtn");
@@ -640,6 +644,7 @@ async function generateCharacter(){
     if(!data.success||!data.dataURI) throw new Error(data.error||"No character image was returned.");
 
     currentImage=data.dataURI;
+    currentImagePrompt=prompt;
     result.src=currentImage;
     result.style.display="block";
     actions.style.display="flex";
@@ -675,6 +680,7 @@ async function generateImage(){
     if(!response.ok) throw new Error(data.error||"Image service request failed.");
     if(!data.success||!data.dataURI) throw new Error(data.error||"No image was returned.");
     currentImage=data.dataURI;
+    currentImagePrompt=finalPrompt;
     result.src=currentImage;result.style.display="block";
     actions.style.display="flex";status.textContent="Your image is ready!";
   }catch(error){
@@ -692,7 +698,7 @@ function saveImage(){
   if(!currentImage) return;
   try{
     const images=JSON.parse(localStorage.getItem("novaGallery")||"[]");
-    images.unshift({src:currentImage,date:new Date().toLocaleDateString()});
+    images.unshift({src:currentImage,date:new Date().toLocaleDateString(),prompt:currentImagePrompt||"Saved AI creation"});
     localStorage.setItem("novaGallery",JSON.stringify(images.slice(0,12)));
     alert("Image saved to your library!");
     renderGallery();
@@ -704,15 +710,20 @@ function renderGallery(){
   gallery.innerHTML="";
   let images=[];
   try{images=JSON.parse(localStorage.getItem("novaGallery")||"[]");}catch(e){}
-  empty.style.display=images.length?"none":"block";
-  images.forEach((item,index)=>{
+  const search=(document.getElementById("librarySearch")?.value||"").trim().toLowerCase();
+  const filtered=images.filter(item=>(String(item.prompt||"Saved AI creation")+" "+String(item.date||"")).toLowerCase().includes(search));
+  document.getElementById("libraryCount").textContent=images.length?(filtered.length+" of "+images.length+" creations"):"";
+  empty.style.display=filtered.length?"none":"block";
+  empty.textContent=images.length?"No creations match your search. Try another word.":"No saved images yet. Create your first image!";
+  filtered.forEach((item,index)=>{
     const wrap=document.createElement("div");wrap.className="gallery-item";
     const img=document.createElement("img");img.src=item.src;img.alt="Saved AI creation";
+    const caption=document.createElement("p");caption.className="description";caption.style.margin="8px 0 0";caption.textContent=(item.prompt||"Saved AI creation")+" · "+(item.date||"");
     const btn=document.createElement("button");btn.className="btn secondary";btn.textContent="Download";
     btn.onclick=()=>{
       const a=document.createElement("a");a.href=item.src;a.download="nova-image-"+(index+1)+".png";a.click();
     };
-    wrap.append(img,btn);gallery.appendChild(wrap);
+    wrap.append(img,caption,btn);gallery.appendChild(wrap);
   });
 }
 loadProject();
