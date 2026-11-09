@@ -210,6 +210,29 @@ textarea{min-height:125px}
  .status{font-size:8px;padding:7px 8px}.section-title{font-size:16px}
 }
 
+
+/* Minimal Flow-inspired creation workspace */
+.create-heading{text-align:center;margin:32px auto 27px;max-width:720px}
+.create-heading h1{font-size:clamp(30px,4vw,43px);letter-spacing:-1.6px;margin:13px 0 9px}
+.create-heading .description{font-size:13px}
+.create-workspace{max-width:850px;margin:0 auto;background:linear-gradient(145deg,#171923,#12141b);border:1px solid #30313e;border-radius:18px;padding:23px;box-shadow:0 22px 65px #0004}
+.create-mode-row{display:flex;gap:8px;padding-bottom:18px;border-bottom:1px solid #2b2d39;margin-bottom:18px}
+.create-mode{border:1px solid transparent;background:transparent;color:#a5a3b1;padding:9px 13px;border-radius:9px;font-size:12px;font-weight:700}
+.create-mode.active{background:#282333;color:#d8c9ff;border-color:#45395b}
+.create-mode:disabled{opacity:.55;cursor:not-allowed}
+.create-mode span{font-size:9px;color:#b7a3ed;margin-left:5px}
+.create-workspace>label{margin:0 0 9px}
+.create-prompt{min-height:150px;background:#0d0f15;border-color:#343442;font-size:13px;line-height:1.75}
+.create-options{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:15px}
+.create-option label{margin:0 0 7px}
+.create-option select{width:100%}
+.create-submit-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:19px;padding-top:17px;border-top:1px solid #2b2d39}
+.create-hint{font-size:10px;color:#85899a}
+.create-generate{min-width:145px}
+.create-workspace .preview{max-width:100%;max-height:720px;object-fit:contain;background:#090a0e}
+.sidebar .nav-label{margin-top:5px}
+.sidebar-bottom{display:none}
+@media(max-width:600px){.create-heading{margin:24px auto 20px}.create-heading h1{font-size:29px}.create-workspace{padding:16px;border-radius:15px}.create-prompt{min-height:125px}.create-submit-row{align-items:stretch;flex-direction:column}.create-generate{width:100%}.create-hint{text-align:center}.create-options{gap:9px}}
 </style>
 </head>
 <body>
@@ -217,19 +240,10 @@ textarea{min-height:125px}
 <aside class="sidebar" id="sidebar">
   <button class="brand" type="button" onclick="showPage('home')" aria-label="Go to home" title="Go to Home">NOVA<span>AI</span><small>FILM STUDIO</small></button>
   <div class="nav-label">WORKSPACE</div>
+  <div class="nav-label">WORKSPACE</div>
   <nav class="nav">
-    <button class="active" data-page="home">⌂ &nbsp; Dashboard</button>
-    <button data-page="story">✎ &nbsp; Story Writer</button>
-    <button data-page="scenes">▤ &nbsp; Scene Generator</button>
-    <button data-page="character">♙ &nbsp; Character Studio</button>
-    <button data-page="image">✦ &nbsp; AI Image Generator</button>
-    <button data-page="library">▦ &nbsp; My Library</button>
-  </nav>
-  <div class="nav-label">COMING LATER</div>
-  <nav class="nav">
-    <button data-page="future">▶ &nbsp; AI Video Studio</button>
-    <button data-page="future">♫ &nbsp; Voice Studio</button>
-    <button data-page="future">✂ &nbsp; Film Editor</button>
+    <button class="active" data-page="home">✦ &nbsp; Create</button>
+    <button data-page="library">▦ &nbsp; Library</button>
   </nav>
   <div class="sidebar-bottom">
     <b>NOVA AI STUDIO</b><br>
@@ -251,30 +265,46 @@ textarea{min-height:125px}
 <div class="content">
 
 <section class="page active" id="home">
-  <div class="hero">
-    <div class="eyebrow">YOUR CREATIVE WORLD STARTS HERE</div>
-    <h1>Make Your Imagination<br>Come Alive.</h1>
-    <p>Write stories, develop characters, create scenes and generate AI images — all inside your creative studio.</p>
-    <div class="actions">
-      <button class="btn" onclick="showPage('story')">＋ Start a Project</button>
-      <button class="btn secondary" onclick="showPage('image')">Create an Image</button>
+  <div class="create-heading">
+    <div class="eyebrow">NOVA AI STUDIO</div>
+    <h1>Create something amazing.</h1>
+    <p class="description">Turn your ideas into images with AI.</p>
+  </div>
+  <div class="create-workspace">
+    <div class="create-mode-row">
+      <button class="create-mode active" type="button">✦ Image</button>
+      <button class="create-mode" type="button" disabled title="Video generation will be available when a video model is connected">▶ Video <span>Coming soon</span></button>
     </div>
-  </div>
-  <h2 class="section-title">Creative Workspace</h2>
-  <div class="grid">
-    <div class="tool-card" onclick="showPage('story')"><div class="tool-icon">✍️</div><h3>Story Writer</h3><p>Develop your story ideas into creative scripts.</p></div>
-    <div class="tool-card" onclick="showPage('scenes')"><div class="tool-icon">🎬</div><h3>Scene Generator</h3><p>Break your story into individual scenes.</p></div>
-    <div class="tool-card" onclick="showPage('character')"><div class="tool-icon">🎭</div><h3>Character Studio</h3><p>Create characters and generate new scenes using reference images.</p></div>
-    <div class="tool-card" onclick="showPage('image')"><div class="tool-icon">🖼️</div><h3>AI Image Generator</h3><p>Turn your text prompts into images.</p></div>
-    <div class="tool-card" onclick="showPage('library')"><div class="tool-icon">📚</div><h3>My Library</h3><p>View your saved AI image creations.</p></div>
-    <div class="tool-card" onclick="showPage('future')"><div class="tool-icon">🎞️</div><h3>AI Video Studio</h3><p>Video creation tools are planned for a future update.</p></div>
-  </div>
-  <h2 class="section-title">Your Project</h2>
-  <div class="panel">
-    <label>Project Name</label><input id="projectName" placeholder="My First Film">
-    <label>Project Idea</label><textarea id="projectIdea" placeholder="Describe your film idea..."></textarea>
-    <div class="actions"><button class="btn" onclick="saveProject()">Save Project</button></div>
-    <div id="projectStatus" class="description"></div>
+    <label for="imagePrompt">Describe what you want to create</label>
+    <textarea id="imagePrompt" class="create-prompt" placeholder="Describe your image in detail..."></textarea>
+    <div class="create-options">
+      <div class="create-option">
+        <label for="imageStyle">Style</label>
+        <select id="imageStyle">
+          <option value="">Automatic</option>
+          <option value="photorealistic photography">Photorealistic</option>
+          <option value="cinematic film still">Cinematic</option>
+          <option value="digital fantasy art">Fantasy Art</option>
+          <option value="3D animated render">3D Animation</option>
+          <option value="anime illustration">Anime</option>
+          <option value="oil painting">Oil Painting</option>
+        </select>
+      </div>
+      <div class="create-option">
+        <label for="imageSteps">Quality</label>
+        <select id="imageSteps"><option value="4">Standard</option><option value="6">High</option><option value="8">Maximum</option></select>
+      </div>
+    </div>
+    <div class="create-submit-row">
+      <span class="create-hint">Image generation · Powered by NOVA AI</span>
+      <button class="btn create-generate" id="generateBtn" onclick="generateImage()">✦ Generate</button>
+    </div>
+    <div id="imageStatus" class="description" style="margin-top:15px"></div>
+    <img id="imageResult" class="preview" style="display:none" alt="AI generated image">
+    <div id="imageActions" class="actions" style="display:none">
+      <button class="btn" onclick="downloadImage()">Download</button>
+      <button class="btn secondary" onclick="saveImage()">Save to Library</button>
+    </div>
   </div>
 </section>
 
@@ -359,35 +389,7 @@ textarea{min-height:125px}
   </div>
 </section>
 
-<section class="page" id="image">
-  <div class="eyebrow">04 / IMAGE CREATION</div>
-  <h1>AI Image Generator</h1>
-  <p class="description">Create images from your imagination using the connected AI service.</p>
-  <div class="panel">
-    <h2>Create Your Image</h2>
-    <label>Image Description</label>
-    <textarea id="imagePrompt" placeholder="A cinematic portrait of a beautiful Pakistani girl standing beside a majestic lion, realistic photography..."></textarea>
-    <label>Image Style</label>
-    <select id="imageStyle">
-      <option value="">No specific style</option>
-      <option value="photorealistic photography">Photorealistic</option>
-      <option value="cinematic film still">Cinematic</option>
-      <option value="digital fantasy art">Fantasy Art</option>
-      <option value="3D animated render">3D Animation</option>
-      <option value="anime illustration">Anime</option>
-      <option value="oil painting">Oil Painting</option>
-    </select>
-    <label>Generation Quality</label>
-    <select id="imageSteps"><option value="4">Standard</option><option value="6">High</option><option value="8">Maximum</option></select>
-    <div class="actions"><button class="btn" id="generateBtn" onclick="generateImage()">✨ Generate Image</button></div>
-    <div id="imageStatus" class="description" style="margin-top:15px"></div>
-    <img id="imageResult" class="preview" style="display:none" alt="AI generated image">
-    <div id="imageActions" class="actions" style="display:none">
-      <button class="btn" onclick="downloadImage()">Download Image</button>
-      <button class="btn secondary" onclick="saveImage()">Save to Library</button>
-    </div>
-  </div>
-</section>
+
 
 <section class="page" id="library">
   <div class="eyebrow">05 / YOUR CREATIONS</div>
@@ -643,7 +645,7 @@ function generateScenes(){
     const btn=document.createElement("button");btn.className="btn secondary";btn.textContent="Use Scene";
     btn.onclick=()=>{
       document.getElementById("imagePrompt").value="Cinematic film scene, "+scene+", realistic details, dramatic lighting, professional cinematography.";
-      showPage("image");
+      showPage("home");
     };
     card.append(heading,para,btn);output.appendChild(card);
   });
