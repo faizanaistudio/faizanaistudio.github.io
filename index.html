@@ -334,7 +334,23 @@ async function signUp(){
     if(error)throw error;
     if(data.session){await refreshAccount(data.session);authMessage("Account created successfully. You are now logged in.");}
     else authMessage("Account created. Check your email for a verification link, then log in.");
-  }catch(error){authMessage(error.message||"Could not create account. Please try again.");}
+  }catch(error){
+    console.error("NOVA signup diagnostic:", {
+      message:error?.message,
+      name:error?.name,
+      status:error?.status,
+      code:error?.code,
+      details:error?.details,
+      hint:error?.hint,
+      cause:error?.cause
+    }, error);
+    const details=[
+      error?.message||"Could not create account.",
+      error?.status ? "HTTP "+error.status : "",
+      error?.code ? "Code: "+error.code : ""
+    ].filter(Boolean).join(" | ");
+    authMessage(details);
+  }
   finally{buttons.forEach(button=>button.disabled=false);}
 }
 async function signIn(){
