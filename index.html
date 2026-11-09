@@ -160,7 +160,7 @@ textarea{min-height:110px;resize:vertical;line-height:1.6}
 <header class="topbar">
   <div style="display:flex;align-items:center;gap:12px">
     <button class="mobile-menu" onclick="toggleMenu()">☰</button>
-    <span class="topbar-title">NOVA AI FILM PRODUCTION</span>
+    
   </div>
   <div class="account-actions"><button class="btn secondary" id="authButton" onclick="openAuth()">Sign in</button><button class="user-avatar" id="userAvatar" onclick="toggleProfileMenu()" aria-label="Open account menu" title="Your account">N</button><div class="profile-menu" id="profileMenu"><div class="profile-top"><div class="profile-avatar" id="profileAvatar">N</div><div><div class="profile-email" id="profileEmail">Your account</div><div class="profile-meta" id="profileMeta">NOVA member</div></div></div><button class="btn secondary" onclick="switchAccount()">Use another account</button><button class="btn secondary profile-alt" onclick="signOut()">Sign out</button></div><span class="status">● STUDIO READY</span></div>
 </header>
@@ -365,6 +365,7 @@ function loadSupabaseLibrary(){
   });
 }
 function openAuth(){
+  if(currentUser){closeAuth();return;}
   closeProfileMenu();
   document.getElementById("authModal").classList.add("open");
   setAuthMode("login");
@@ -397,6 +398,7 @@ async function refreshAccount(session){
   currentUser=session?.user||null;
   const button=document.getElementById("authButton"),avatar=document.getElementById("userAvatar");
   if(!currentUser){currentProfile=null;button.style.display="inline-block";avatar.style.display="none";closeProfileMenu();return;}
+  closeAuth();
   button.style.display="none";avatar.style.display="flex";
   const initial=getUserInitial(currentUser);
   avatar.textContent=initial;document.getElementById("profileAvatar").textContent=initial;
