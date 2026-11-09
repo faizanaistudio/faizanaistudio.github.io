@@ -419,7 +419,7 @@ async function signUp(){
   const submit=document.getElementById("authSubmitButton");
   submit.disabled=true;submit.textContent="Creating account...";authMessage("Creating your account securely...");
   try{
-    const {data,error}=await supabaseClient.auth.signUp({email,password,options:{data:{full_name:name,name:name}}});
+    const {data,error}=await supabaseClient.auth.signUp({email,password,options:{data:{full_name:name,name:name,legal_consent:true,privacy_policy_version:"1.0",terms_version:"1.0"}}});
     if(error)throw error;
     if(data.session){await refreshAccount(data.session);closeAuth();}
     else authMessage("Account created. Please check your email if verification is required.");
