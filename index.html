@@ -70,8 +70,35 @@ textarea{min-height:110px;resize:vertical;line-height:1.6}
 @media(max-width:850px){.sidebar{width:210px}.main{margin-left:210px;width:calc(100% - 210px)}.grid,.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.content{padding:22px}}
 @media(max-width:600px){.sidebar{display:none;width:250px;box-shadow:10px 0 30px #0009}.sidebar.open{display:flex}.main{margin-left:0;width:100%}.topbar{height:60px;padding:0 15px}.mobile-menu{display:block;background:none;color:white;border:0;font-size:22px}.content{padding:17px}.hero{padding:22px}h1{font-size:27px}.grid,.gallery{grid-template-columns:1fr 1fr;gap:10px}.tool-card{padding:14px;min-height:145px}.panel{padding:16px}.footer{padding:18px}}
 
-/* Account and authentication */
-.account-actions{display:flex;align-items:center;gap:10px}.account-chip{display:none}.auth-modal{display:none;position:fixed;inset:0;background:#000b;z-index:20;align-items:center;justify-content:center;padding:18px}.auth-modal.open{display:flex}.auth-box{width:100%;max-width:420px;background:#11151e;border:1px solid #343d50;border-radius:16px;padding:24px;box-shadow:0 20px 70px #0009}.auth-box h2{margin:0 0 8px}.auth-message{font-size:12px;line-height:1.6;color:#ffbd80;min-height:20px;margin-top:12px}.auth-mode{flex:1;min-width:120px}.auth-mode.active{background:linear-gradient(110deg,#ff8735,#ffb04f);color:#17100b;border:0}.auth-close{float:right;background:transparent;border:0;color:#aab3c3;font-size:22px}
+/* Professional account menu and authentication */
+.account-actions{display:flex;align-items:center;gap:14px;position:relative}
+.account-chip{display:none}
+.user-avatar{width:40px;height:40px;border-radius:50%;border:1px solid #76502f;background:linear-gradient(145deg,#ffb45e,#e76b25);color:#21140b;font-weight:900;font-size:15px;display:none;align-items:center;justify-content:center;box-shadow:0 3px 14px #ff8b3630}
+.user-avatar:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.profile-menu{display:none;position:absolute;right:0;top:52px;width:270px;background:#151b26;border:1px solid #303a4c;border-radius:14px;padding:16px;z-index:30;box-shadow:0 18px 55px #000c}
+.profile-menu.open{display:block}
+.profile-top{display:flex;align-items:center;gap:11px;padding-bottom:13px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.profile-avatar{width:42px;height:42px;flex:0 0 42px;border-radius:50%;background:#3a2a1d;color:#ffb36d;display:flex;align-items:center;justify-content:center;font-weight:900}
+.profile-email{font-size:12px;color:#f1f3f8;overflow-wrap:anywhere}
+.profile-meta{font-size:10px;color:var(--muted);margin-top:4px}
+.profile-menu .btn{width:100%;margin-top:8px}
+.auth-modal{display:none;position:fixed;inset:0;background:rgba(3,5,9,.78);backdrop-filter:blur(9px);z-index:40;align-items:center;justify-content:center;padding:18px}
+.auth-modal.open{display:flex}
+.auth-box{position:relative;width:100%;max-width:430px;background:linear-gradient(160deg,#171e2a,#0e121b 70%);border:1px solid #303b4e;border-radius:22px;padding:30px;box-shadow:0 28px 90px #000c}
+.auth-brand{display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.auth-brand-mark{width:39px;height:39px;border-radius:12px;background:linear-gradient(135deg,#ffb15a,#f0782e);display:flex;align-items:center;justify-content:center;color:#20130b;font-weight:1000;font-size:17px}
+.auth-brand-name{font-size:14px;font-weight:900;letter-spacing:1.5px}.auth-brand-name span{color:var(--orange)}
+.auth-brand small{display:block;color:var(--muted);font-size:9px;letter-spacing:2px;margin-top:3px}
+.auth-close{position:absolute;right:18px;top:16px;width:34px;height:34px;border-radius:9px;background:#222a39;border:1px solid var(--line);color:#d6dce7;font-size:20px}
+.auth-box h2{font-size:24px;margin:0 0 7px}.auth-subtitle{font-size:12px;color:var(--muted);line-height:1.6;margin:0 0 22px}
+.auth-box label{margin:15px 0 7px}.auth-box input{padding:14px;border-radius:10px;background:#0a0e16}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px;background:#0a0e16;border:1px solid var(--line);padding:4px;border-radius:11px;margin:20px 0 8px}
+.auth-mode{border:0;border-radius:8px;padding:10px;background:transparent;color:#9ca7ba;font-size:12px;font-weight:700}
+.auth-mode.active{background:#283243;color:#fff;box-shadow:0 2px 8px #0005}
+.auth-submit{width:100%;margin-top:18px;padding:14px;font-size:13px}
+.auth-message{font-size:11px;line-height:1.6;color:#ffbd80;min-height:18px;margin-top:13px;text-align:center}
+.auth-footnote{font-size:10px;color:#697487;text-align:center;margin:13px 0 0}
+@media(max-width:600px){.profile-menu{right:-3px;width:min(270px,calc(100vw - 30px))}.auth-box{padding:24px 20px;border-radius:18px}}
 </style>
 </head>
 <body>
@@ -106,10 +133,10 @@ textarea{min-height:110px;resize:vertical;line-height:1.6}
     <button class="mobile-menu" onclick="toggleMenu()">☰</button>
     <span class="topbar-title">NOVA AI FILM PRODUCTION</span>
   </div>
-  <div class="account-actions"><span class="account-chip" id="accountInfo" aria-hidden="true"></span><button class="btn secondary" id="authButton" onclick="openAuth()">Login / Sign up</button><span class="status">● STUDIO READY</span></div>
+  <div class="account-actions"><button class="btn secondary" id="authButton" onclick="openAuth()">Sign in</button><button class="user-avatar" id="userAvatar" onclick="toggleProfileMenu()" aria-label="Open account menu" title="Your account">N</button><div class="profile-menu" id="profileMenu"><div class="profile-top"><div class="profile-avatar" id="profileAvatar">N</div><div><div class="profile-email" id="profileEmail">Your account</div><div class="profile-meta" id="profileMeta">NOVA member</div></div></div><button class="btn secondary" onclick="closeProfileMenu();openAuth()">Account settings</button><button class="btn secondary" onclick="signOut()">Sign out</button></div><span class="status">● STUDIO READY</span></div>
 </header>
 
-<div class="auth-modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authHeading"><div class="auth-box"><button class="auth-close" onclick="closeAuth()" aria-label="Close">×</button><h2 id="authHeading">NOVA Account</h2><p class="description">Sign in or create an account to access your NOVA profile.</p><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"><label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="At least 6 characters"><div class="actions"><button class="btn auth-mode active" id="loginModeButton" onclick="setAuthMode('login')">Login</button><button class="btn secondary auth-mode" id="signupModeButton" onclick="setAuthMode('signup')">Create Account</button><button class="btn secondary" id="signOutButton" onclick="signOut()" style="display:none">Sign Out</button></div><div class="auth-message" id="authMessage" role="status" aria-live="polite"></div></div></div>
+<div class="auth-modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authHeading" onclick="if(event.target===this)closeAuth()"><div class="auth-box"><button class="auth-close" onclick="closeAuth()" aria-label="Close">×</button><div class="auth-brand"><div class="auth-brand-mark">N</div><div><div class="auth-brand-name">NOVA<span>AI</span></div><small>FILM STUDIO</small></div></div><h2 id="authHeading">Welcome back</h2><p class="auth-subtitle" id="authSubtitle">Sign in to continue to your creative workspace.</p><label for="authEmail">Email address</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"><label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Enter your password"><div class="auth-tabs"><button type="button" class="auth-mode active" id="loginModeButton" onclick="setAuthMode('login')">Sign in</button><button type="button" class="auth-mode" id="signupModeButton" onclick="setAuthMode('signup')">Create account</button></div><button class="btn auth-submit" id="authSubmitButton" onclick="submitAuth()">Sign in to NOVA</button><div class="auth-message" id="authMessage" role="status" aria-live="polite"></div><p class="auth-footnote">Secure account access · NOVA AI STUDIO</p></div></div>
 <div class="content">
 
 <section class="page active" id="home">
@@ -306,6 +333,7 @@ function loadSupabaseLibrary(){
   });
 }
 function openAuth(){
+  closeProfileMenu();
   document.getElementById("authModal").classList.add("open");
   setAuthMode("login");
   document.getElementById("authMessage").textContent=supabaseClient?"":"Connecting to account service...";
@@ -317,73 +345,95 @@ function setAuthMode(mode){
   const signup=document.getElementById("signupModeButton");
   const isLogin=mode==="login";
   login.classList.toggle("active",isLogin);
-  login.classList.toggle("secondary",!isLogin);
   signup.classList.toggle("active",!isLogin);
-  signup.classList.toggle("secondary",isLogin);
+  document.getElementById("authHeading").textContent=isLogin?"Welcome back":"Create your NOVA account";
+  document.getElementById("authSubtitle").textContent=isLogin?"Sign in to continue to your creative workspace.":"Join NOVA and start creating your stories and characters.";
+  document.getElementById("authSubmitButton").textContent=isLogin?"Sign in to NOVA":"Create my account";
   document.getElementById("authPassword").autocomplete=isLogin?"current-password":"new-password";
+  document.getElementById("authMessage").textContent="";
+}
+function toggleProfileMenu(){
+  document.getElementById("profileMenu").classList.toggle("open");
+}
+function closeProfileMenu(){
+  document.getElementById("profileMenu").classList.remove("open");
+}
+function getUserInitial(user){
+  const label=(user?.user_metadata?.full_name||user?.user_metadata?.name||user?.email||"N").trim();
+  return (label.includes("@")?label.split("@")[0]:label).charAt(0).toUpperCase()||"N";
 }
 async function refreshAccount(session){
   currentUser=session?.user||null;
   const button=document.getElementById("authButton");
-  const signOut=document.getElementById("signOutButton");
-  if(!currentUser){currentProfile=null;button.textContent="Login / Sign up";signOut.style.display="none";return;}
-  button.textContent="My Account";signOut.style.display="inline-block";
+  const avatar=document.getElementById("userAvatar");
+  if(!currentUser){
+    currentProfile=null;
+    button.style.display="inline-block";
+    avatar.style.display="none";
+    closeProfileMenu();
+    return;
+  }
+  button.style.display="none";
+  avatar.style.display="flex";
+  const initial=getUserInitial(currentUser);
+  avatar.textContent=initial;
+  document.getElementById("profileAvatar").textContent=initial;
+  document.getElementById("profileEmail").textContent=currentUser.email||"NOVA member";
+  document.getElementById("profileMeta").textContent="NOVA member";
   const {data,error}=await supabaseClient.from("profiles").select("credits,role").eq("id",currentUser.id).maybeSingle();
   if(error){console.error("NOVA profile:",error);return;}
   currentProfile=data;
+  if(data){
+    document.getElementById("profileMeta").textContent=(data.role==="admin"?"Administrator":"NOVA member")+(data.credits!=null?" · "+data.credits+" credits":"");
+  }
+}
+async function submitAuth(){
+  const mode=document.getElementById("signupModeButton").classList.contains("active")?"signup":"login";
+  if(mode==="signup")return signUp();
+  return signIn();
 }
 async function signUp(){
-  setAuthMode("signup");
   const email=document.getElementById("authEmail").value.trim();
   const password=document.getElementById("authPassword").value;
   if(!email||password.length<6)return authMessage("Enter a valid email and a password with at least 6 characters.");
   if(!supabaseClient)return authMessage("Account service is still connecting. Please wait a moment and try again.");
-  const buttons=document.querySelectorAll("#authModal .actions button");
-  buttons.forEach(button=>button.disabled=true);
-  authMessage("Creating your account...");
+  const submit=document.getElementById("authSubmitButton");
+  submit.disabled=true;submit.textContent="Creating account...";
+  authMessage("Creating your account securely...");
   try{
     const {data,error}=await supabaseClient.auth.signUp({email,password});
     if(error)throw error;
     if(data.session){await refreshAccount(data.session);closeAuth();}
-    else authMessage("Account created. Check your email for a verification link, then log in.");
+    else authMessage("Account created. Please check your email if verification is required.");
   }catch(error){
-    console.error("NOVA signup diagnostic:", {
-      message:error?.message,
-      name:error?.name,
-      status:error?.status,
-      code:error?.code,
-      details:error?.details,
-      hint:error?.hint,
-      cause:error?.cause
-    }, error);
-    const details=[
-      error?.message||"Could not create account.",
-      error?.status ? "HTTP "+error.status : "",
-      error?.code ? "Code: "+error.code : ""
-    ].filter(Boolean).join(" | ");
-    authMessage(details);
+    console.error("NOVA signup diagnostic:",{message:error?.message,status:error?.status,code:error?.code});
+    authMessage([error?.message||"Could not create account.",error?.status?"HTTP "+error.status:"",error?.code?"Code: "+error.code:""].filter(Boolean).join(" | "));
+  }finally{
+    submit.disabled=false;
+    submit.textContent=document.getElementById("signupModeButton").classList.contains("active")?"Create my account":"Sign in to NOVA";
   }
-  finally{buttons.forEach(button=>button.disabled=false);}
 }
 async function signIn(){
-  setAuthMode("login");
   const email=document.getElementById("authEmail").value.trim();
   const password=document.getElementById("authPassword").value;
   if(!email||!password)return authMessage("Enter your email and password.");
   if(!supabaseClient)return authMessage("Account service is still connecting. Please wait a moment and try again.");
-  authMessage("Signing in...");
+  const submit=document.getElementById("authSubmitButton");
+  submit.disabled=true;submit.textContent="Signing in...";
+  authMessage("Signing in securely...");
   try{
     const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
     if(error)throw error;
     await refreshAccount(data.session);closeAuth();
   }catch(error){authMessage(error.message||"Login failed. Please try again.");}
+  finally{submit.disabled=false;submit.textContent="Sign in to NOVA";}
 }
 async function signOut(){
   if(!supabaseClient)return authMessage("Account service is not available.");
   try{
     const {error}=await supabaseClient.auth.signOut();
     if(error)throw error;
-    await refreshAccount(null);authMessage("You have signed out.");
+    await refreshAccount(null);closeProfileMenu();
   }catch(error){authMessage(error.message||"Sign out failed.");}
 }
 async function initializeAuth(){
