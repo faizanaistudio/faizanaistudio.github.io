@@ -69,6 +69,9 @@ textarea{min-height:110px;resize:vertical;line-height:1.6}
 .mobile-menu{display:none}
 @media(max-width:850px){.sidebar{width:210px}.main{margin-left:210px;width:calc(100% - 210px)}.grid,.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.content{padding:22px}}
 @media(max-width:600px){.sidebar{display:none;width:250px;box-shadow:10px 0 30px #0009}.sidebar.open{display:flex}.main{margin-left:0;width:100%}.topbar{height:60px;padding:0 15px}.mobile-menu{display:block;background:none;color:white;border:0;font-size:22px}.content{padding:17px}.hero{padding:22px}h1{font-size:27px}.grid,.gallery{grid-template-columns:1fr 1fr;gap:10px}.tool-card{padding:14px;min-height:145px}.panel{padding:16px}.footer{padding:18px}}
+
+/* Account and authentication */
+.account-actions{display:flex;align-items:center;gap:10px}.account-chip{font-size:11px;color:#cbd4e4}.auth-modal{display:none;position:fixed;inset:0;background:#000b;z-index:20;align-items:center;justify-content:center;padding:18px}.auth-modal.open{display:flex}.auth-box{width:100%;max-width:420px;background:#11151e;border:1px solid #343d50;border-radius:16px;padding:24px;box-shadow:0 20px 70px #0009}.auth-box h2{margin:0 0 8px}.auth-message{font-size:12px;line-height:1.6;color:#ffbd80;min-height:20px;margin-top:12px}.auth-close{float:right;background:transparent;border:0;color:#aab3c3;font-size:22px}
 </style>
 </head>
 <body>
@@ -103,9 +106,10 @@ textarea{min-height:110px;resize:vertical;line-height:1.6}
     <button class="mobile-menu" onclick="toggleMenu()">☰</button>
     <span class="topbar-title">NOVA AI FILM PRODUCTION</span>
   </div>
-  <span class="status">● STUDIO READY</span>
+  <div class="account-actions"><span class="account-chip" id="accountInfo">Guest account</span><button class="btn secondary" id="authButton" onclick="openAuth()">Login / Sign up</button><span class="status">● STUDIO READY</span></div>
 </header>
 
+<div class="auth-modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authHeading"><div class="auth-box"><button class="auth-close" onclick="closeAuth()" aria-label="Close">×</button><h2 id="authHeading">NOVA Account</h2><p class="description">Sign in or create an account to access your NOVA profile.</p><label for="authEmail">Email</label><input id="authEmail" type="email" autocomplete="email" placeholder="you@example.com"><label for="authPassword">Password</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="At least 6 characters"><div class="actions"><button class="btn" onclick="signIn()">Login</button><button class="btn secondary" onclick="signUp()">Create Account</button><button class="btn secondary" id="signOutButton" onclick="signOut()" style="display:none">Sign Out</button></div><div class="auth-message" id="authMessage" role="status"></div><p class="description">New accounts receive the welcome credits configured in the database. Email verification may be required.</p></div></div>
 <div class="content">
 
 <section class="page active" id="home">
@@ -273,8 +277,62 @@ textarea{min-height:110px;resize:vertical;line-height:1.6}
 </main>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const API_BASE = "https://nova-ai-backend.zitband1.workers.dev";
+const SUPABASE_URL = "https://zmtlrecnfdpfntgikwfa.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_MmFCezzFl5D-l2H1cZ5iPA_Ts7eJr6B";
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+let currentUser = null;
+let currentProfile = null;
+
+function openAuth(){document.getElementById("authModal").classList.add("open");document.getElementById("authMessage").textContent="";}
+function closeAuth(){document.getElementById("authModal").classList.remove("open");}
+function authMessage(message){document.getElementById("authMessage").textContent=message;}
+async function refreshAccount(session){
+  currentUser=session?.user||null;
+  const info=document.getElementById("accountInfo");
+  const button=document.getElementById("authButton");
+  const signOut=document.getElementById("signOutButton");
+  if(!currentUser){currentProfile=null;info.textContent="Guest account";button.textContent="Login / Sign up";signOut.style.display="none";return;}
+  button.textContent="My Account";signOut.style.display="inline-block";
+  info.textContent=currentUser.email+" · Loading credits...";
+  const {data,error}=await supabaseClient.from("profiles").select("credits,role").eq("id",currentUser.id).maybeSingle();
+  if(error){info.textContent=currentUser.email+" · Profile unavailable";console.error("NOVA profile:",error);return;}
+  currentProfile=data;
+  info.textContent=currentUser.email+" · "+(data?.credits??0)+" credits";
+}
+async function signUp(){
+  const email=document.getElementById("authEmail").value.trim();
+  const password=document.getElementById("authPassword").value;
+  if(!email||password.length<6)return authMessage("Enter a valid email and a password with at least 6 characters.");
+  authMessage("Creating your account...");
+  const {data,error}=await supabaseClient.auth.signUp({email,password});
+  if(error)return authMessage(error.message);
+  if(data.session){await refreshAccount(data.session);authMessage("Account created successfully.");}
+  else authMessage("Account created. Please check your email for a verification link, then log in.");
+}
+async function signIn(){
+  const email=document.getElementById("authEmail").value.trim();
+  const password=document.getElementById("authPassword").value;
+  if(!email||!password)return authMessage("Enter your email and password.");
+  authMessage("Signing in...");
+  const {data,error}=await supabaseClient.auth.signInWithPassword({email,password});
+  if(error)return authMessage(error.message);
+  await refreshAccount(data.session);authMessage("You are logged in.");
+}
+async function signOut(){
+  const {error}=await supabaseClient.auth.signOut();
+  if(error)return authMessage(error.message);
+  await refreshAccount(null);authMessage("You have signed out.");
+}
+async function initializeAuth(){
+  const {data,error}=await supabaseClient.auth.getSession();
+  if(error)console.error("NOVA session:",error);
+  await refreshAccount(data?.session||null);
+  supabaseClient.auth.onAuthStateChange((_event,session)=>{setTimeout(()=>refreshAccount(session),0);});
+}
+
 const GENERATE_API = API_BASE + "/generate";
 const CHARACTER_API = API_BASE + "/character";
 
@@ -515,6 +573,7 @@ function renderGallery(){
 }
 loadProject();
 renderGallery();
+initializeAuth();
 </script>
 </body>
 </html>
