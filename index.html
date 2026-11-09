@@ -7,284 +7,71 @@
 <title>NOVA AI FILM STUDIO</title>
 <meta name="description" content="NOVA AI Film Studio - Create stories, characters and AI images.">
 <style>
-:root{
-  --bg:#090b10;
-  --panel:#11151e;
-  --panel2:#171d29;
-  --line:#252d3b;
-  --text:#f3f5fa;
-  --muted:#929bad;
-  --orange:#ff8b36;
-  --purple:#9675ff;
-}
+:root{--bg:#090b10;--panel:#11151e;--panel2:#171d29;--line:#252d3b;--text:#f3f5fa;--muted:#929bad;--orange:#ff8b36;--purple:#9675ff}
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Inter,Arial,sans-serif;
-}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 .app{display:flex;min-height:100vh}
-.sidebar{
-  width:245px;
-  background:#0d1017;
-  border-right:1px solid var(--line);
-  padding:25px 16px;
-  position:fixed;
-  top:0;bottom:0;left:0;
-  display:flex;
-  flex-direction:column;
-  z-index:5;
-}
-.brand{
-  font-size:22px;
-  font-weight:900;
-  letter-spacing:1px;
-  padding:5px 10px 30px;
-}
+.sidebar{width:245px;background:#0d1017;border-right:1px solid var(--line);padding:25px 16px;position:fixed;top:0;bottom:0;left:0;display:flex;flex-direction:column;z-index:5}
+.brand{font-size:22px;font-weight:900;letter-spacing:1px;padding:5px 10px 30px}
 .brand span{color:var(--orange)}
-.brand small{
-  display:block;
-  font-size:9px;
-  letter-spacing:4px;
-  color:var(--muted);
-  margin-top:5px;
-}
-.nav-label{
-  color:#687386;
-  font-size:10px;
-  letter-spacing:2px;
-  padding:12px 12px;
-}
-.nav button{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  width:100%;
-  padding:13px 14px;
-  border:0;
-  border-radius:9px;
-  background:transparent;
-  color:#aab3c3;
-  text-align:left;
-  margin:3px 0;
-  font-size:13px;
-}
-.nav button:hover,.nav button.active{
-  background:#1b202c;
-  color:white;
-}
+.brand small{display:block;font-size:9px;letter-spacing:4px;color:var(--muted);margin-top:5px}
+.nav-label{color:#687386;font-size:10px;letter-spacing:2px;padding:12px}
+.nav button{display:flex;align-items:center;gap:12px;width:100%;padding:13px 14px;border:0;border-radius:9px;background:transparent;color:#aab3c3;text-align:left;margin:3px 0;font-size:13px}
+.nav button:hover,.nav button.active{background:#1b202c;color:white}
 .nav button.active{border-left:3px solid var(--orange)}
-.sidebar-bottom{
-  margin-top:auto;
-  padding:15px;
-  border:1px solid var(--line);
-  border-radius:12px;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.7;
-}
-.main{
-  margin-left:245px;
-  width:calc(100% - 245px);
-  min-width:0;
-}
-.topbar{
-  height:70px;
-  border-bottom:1px solid var(--line);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 30px;
-  background:#0c0f16;
-}
+.sidebar-bottom{margin-top:auto;padding:15px;border:1px solid var(--line);border-radius:12px;color:var(--muted);font-size:11px;line-height:1.7}
+.main{margin-left:245px;width:calc(100% - 245px);min-width:0}
+.topbar{height:70px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;background:#0c0f16}
 .topbar-title{font-size:13px;color:#aeb7c7}
-.status{
-  border:1px solid #294c3b;
-  color:#65d99b;
-  border-radius:20px;
-  padding:7px 12px;
-  font-size:10px;
-}
-.content{
-  max-width:1250px;
-  margin:auto;
-  padding:35px;
-}
+.status{border:1px solid #294c3b;color:#65d99b;border-radius:20px;padding:7px 12px;font-size:10px}
+.content{max-width:1250px;margin:auto;padding:35px}
 .page{display:none}
 .page.active{display:block}
-.hero{
-  padding:30px;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:
-  radial-gradient(circle at 85% 20%,#372342 0,transparent 38%),
-  linear-gradient(120deg,#171d2b,#11151e);
-  margin-bottom:28px;
-}
-.eyebrow{
-  color:var(--orange);
-  font-size:10px;
-  letter-spacing:3px;
-  font-weight:bold;
-}
+.hero{padding:30px;border:1px solid var(--line);border-radius:18px;background:radial-gradient(circle at 85% 20%,#372342 0,transparent 38%),linear-gradient(120deg,#171d2b,#11151e);margin-bottom:28px}
+.eyebrow{color:var(--orange);font-size:10px;letter-spacing:3px;font-weight:bold}
 h1{font-size:35px;margin:13px 0}
 .hero p{color:var(--muted);font-size:14px;line-height:1.7;max-width:570px}
 .section-title{font-size:19px;margin:25px 0 15px}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:15px;
-}
-.tool-card{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:20px;
-  min-height:155px;
-  transition:.2s;
-  cursor:pointer;
-}
-.tool-card:hover{
-  border-color:#7456b7;
-  transform:translateY(-2px);
-}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.tool-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;min-height:155px;transition:.2s;cursor:pointer}
+.tool-card:hover{border-color:#7456b7;transform:translateY(-2px)}
 .tool-icon{font-size:25px;margin-bottom:15px}
 .tool-card h3{font-size:14px;margin:0 0 8px}
 .tool-card p{font-size:11px;color:var(--muted);line-height:1.6}
-.panel{
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:15px;
-  padding:23px;
-  margin-bottom:18px;
-}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:23px;margin-bottom:18px}
 .panel h2{font-size:18px;margin:0 0 8px}
 .description{font-size:12px;color:var(--muted);line-height:1.6}
-label{
-  display:block;
-  color:#c5ccda;
-  font-size:12px;
-  margin:19px 0 8px;
-}
-input,textarea,select{
-  width:100%;
-  padding:13px 14px;
-  border-radius:9px;
-  border:1px solid var(--line);
-  background:#0b0f17;
-  color:white;
-  outline:none;
-}
+label{display:block;color:#c5ccda;font-size:12px;margin:19px 0 8px}
+input,textarea,select{width:100%;padding:13px 14px;border-radius:9px;border:1px solid var(--line);background:#0b0f17;color:white;outline:none}
 input:focus,textarea:focus,select:focus{border-color:var(--purple)}
-textarea{min-height:125px;resize:vertical;line-height:1.6}
-.btn{
-  border:0;
-  border-radius:9px;
-  padding:12px 18px;
-  background:linear-gradient(110deg,#ff8735,#ffb04f);
-  color:#17100b;
-  font-weight:800;
-  font-size:12px;
-}
+textarea{min-height:110px;resize:vertical;line-height:1.6}
+.btn{border:0;border-radius:9px;padding:12px 18px;background:linear-gradient(110deg,#ff8735,#ffb04f);color:#17100b;font-weight:800;font-size:12px}
 .btn:hover{filter:brightness(1.1)}
-.btn.secondary{
-  background:#222a39;
-  color:white;
-  border:1px solid var(--line);
-}
+.btn.secondary{background:#222a39;color:white;border:1px solid var(--line)}
+.btn:disabled{opacity:.55;cursor:not-allowed}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.output{
-  white-space:pre-wrap;
-  background:#0b0f17;
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:15px;
-  color:#c7d0df;
-  font-size:12px;
-  line-height:1.8;
-  min-height:60px;
-  margin-top:15px;
-}
-.scene{
-  padding:15px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  margin-top:10px;
-  background:#0d111a;
-}
+.output{white-space:pre-wrap;background:#0b0f17;border:1px solid var(--line);border-radius:10px;padding:15px;color:#c7d0df;font-size:12px;line-height:1.8;min-height:60px;margin-top:15px}
+.scene{padding:15px;border:1px solid var(--line);border-radius:10px;margin-top:10px;background:#0d111a}
 .scene h3{font-size:13px;margin:0 0 7px}
 .scene p{font-size:12px;color:var(--muted);line-height:1.6}
-.scene button{margin-top:8px}
-.preview{
-  width:100%;
-  max-width:600px;
-  display:block;
-  margin-top:20px;
-  border-radius:12px;
-  border:1px solid var(--line);
-}
-.gallery{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:14px;
-}
-.gallery img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  border-radius:10px;
-  border:1px solid var(--line);
-}
+.preview{width:100%;max-width:600px;display:block;margin-top:20px;border-radius:12px;border:1px solid var(--line)}
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
 .gallery-item{min-width:0}
 .gallery-item button{margin-top:7px}
-.notice{
-  font-size:11px;
-  color:#e8b978;
-  background:#2b2115;
-  padding:12px;
-  border-radius:8px;
-  line-height:1.6;
-  margin-top:14px;
-}
-.footer{
-  border-top:1px solid var(--line);
-  padding:20px 35px;
-  color:#6f798a;
-  font-size:10px;
-  margin-top:40px;
-}
+.notice{font-size:11px;color:#e8b978;background:#2b2115;padding:12px;border-radius:8px;line-height:1.6;margin-top:14px}
+.upload-box{border:1px dashed #555e72;border-radius:12px;padding:20px;text-align:center;background:#0b0f17}
+.upload-box input{border:0;padding:10px;background:transparent}
+.upload-preview{display:none;width:100%;max-width:360px;max-height:360px;object-fit:contain;border-radius:12px;margin:15px auto 0;border:1px solid var(--line)}
+.footer{border-top:1px solid var(--line);padding:20px 35px;color:#6f798a;font-size:10px;margin-top:40px}
 .mobile-menu{display:none}
-@media(max-width:850px){
-  .sidebar{width:210px}
-  .main{margin-left:210px;width:calc(100% - 210px)}
-  .grid,.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .content{padding:22px}
-}
-@media(max-width:600px){
-  .sidebar{
-    display:none;
-    width:250px;
-    box-shadow:10px 0 30px #0009;
-  }
-  .sidebar.open{display:flex}
-  .main{margin-left:0;width:100%}
-  .topbar{height:60px;padding:0 15px}
-  .mobile-menu{display:block;background:none;color:white;border:0;font-size:22px}
-  .content{padding:17px}
-  .hero{padding:22px}
-  h1{font-size:27px}
-  .grid,.gallery{grid-template-columns:1fr 1fr;gap:10px}
-  .tool-card{padding:14px;min-height:145px}
-  .panel{padding:16px}
-  .footer{padding:18px}
-}
+@media(max-width:850px){.sidebar{width:210px}.main{margin-left:210px;width:calc(100% - 210px)}.grid,.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.content{padding:22px}}
+@media(max-width:600px){.sidebar{display:none;width:250px;box-shadow:10px 0 30px #0009}.sidebar.open{display:flex}.main{margin-left:0;width:100%}.topbar{height:60px;padding:0 15px}.mobile-menu{display:block;background:none;color:white;border:0;font-size:22px}.content{padding:17px}.hero{padding:22px}h1{font-size:27px}.grid,.gallery{grid-template-columns:1fr 1fr;gap:10px}.tool-card{padding:14px;min-height:145px}.panel{padding:16px}.footer{padding:18px}}
 </style>
 </head>
 <body>
-
 <div class="app">
 <aside class="sidebar" id="sidebar">
   <div class="brand">NOVA<span>AI</span><small>FILM STUDIO</small></div>
@@ -306,7 +93,7 @@ textarea{min-height:125px;resize:vertical;line-height:1.6}
   <div class="sidebar-bottom">
     <b>NOVA AI STUDIO</b><br>
     Creative tools for storytellers.<br>
-    <span style="color:#ff9a4b">Version 2.0</span>
+    <span style="color:#ff9a4b">Version 3.0</span>
   </div>
 </aside>
 
@@ -331,49 +118,20 @@ textarea{min-height:125px;resize:vertical;line-height:1.6}
       <button class="btn secondary" onclick="showPage('image')">Create an Image</button>
     </div>
   </div>
-
   <h2 class="section-title">Creative Workspace</h2>
   <div class="grid">
-    <div class="tool-card" onclick="showPage('story')">
-      <div class="tool-icon">✍️</div>
-      <h3>Story Writer</h3>
-      <p>Develop your story ideas into creative scripts.</p>
-    </div>
-    <div class="tool-card" onclick="showPage('scenes')">
-      <div class="tool-icon">🎬</div>
-      <h3>Scene Generator</h3>
-      <p>Break your story into individual scenes.</p>
-    </div>
-    <div class="tool-card" onclick="showPage('character')">
-      <div class="tool-icon">🎭</div>
-      <h3>Character Studio</h3>
-      <p>Build detailed characters and character sheet prompts.</p>
-    </div>
-    <div class="tool-card" onclick="showPage('image')">
-      <div class="tool-icon">🖼️</div>
-      <h3>AI Image Generator</h3>
-      <p>Turn your text prompts into images.</p>
-    </div>
-    <div class="tool-card" onclick="showPage('library')">
-      <div class="tool-icon">📚</div>
-      <h3>My Library</h3>
-      <p>View your saved AI image creations.</p>
-    </div>
-    <div class="tool-card" onclick="showPage('future')">
-      <div class="tool-icon">🎞️</div>
-      <h3>AI Video Studio</h3>
-      <p>Video creation tools are planned for a future update.</p>
-    </div>
+    <div class="tool-card" onclick="showPage('story')"><div class="tool-icon">✍️</div><h3>Story Writer</h3><p>Develop your story ideas into creative scripts.</p></div>
+    <div class="tool-card" onclick="showPage('scenes')"><div class="tool-icon">🎬</div><h3>Scene Generator</h3><p>Break your story into individual scenes.</p></div>
+    <div class="tool-card" onclick="showPage('character')"><div class="tool-icon">🎭</div><h3>Character Studio</h3><p>Create characters and generate new scenes using reference images.</p></div>
+    <div class="tool-card" onclick="showPage('image')"><div class="tool-icon">🖼️</div><h3>AI Image Generator</h3><p>Turn your text prompts into images.</p></div>
+    <div class="tool-card" onclick="showPage('library')"><div class="tool-icon">📚</div><h3>My Library</h3><p>View your saved AI image creations.</p></div>
+    <div class="tool-card" onclick="showPage('future')"><div class="tool-icon">🎞️</div><h3>AI Video Studio</h3><p>Video creation tools are planned for a future update.</p></div>
   </div>
   <h2 class="section-title">Your Project</h2>
   <div class="panel">
-    <label>Project Name</label>
-    <input id="projectName" placeholder="My First Film">
-    <label>Project Idea</label>
-    <textarea id="projectIdea" placeholder="Describe your film idea..."></textarea>
-    <div class="actions">
-      <button class="btn" onclick="saveProject()">Save Project</button>
-    </div>
+    <label>Project Name</label><input id="projectName" placeholder="My First Film">
+    <label>Project Idea</label><textarea id="projectIdea" placeholder="Describe your film idea..."></textarea>
+    <div class="actions"><button class="btn" onclick="saveProject()">Save Project</button></div>
     <div id="projectStatus" class="description"></div>
   </div>
 </section>
@@ -384,16 +142,10 @@ textarea{min-height:125px;resize:vertical;line-height:1.6}
   <p class="description">Write your story, create a concept or prepare a film outline.</p>
   <div class="panel">
     <h2>Your Story</h2>
-    <label>Story Title</label>
-    <input id="storyTitle" placeholder="The Last Guardian">
-    <label>Story Description</label>
-    <textarea id="storyText" placeholder="Write your story idea here..."></textarea>
+    <label>Story Title</label><input id="storyTitle" placeholder="The Last Guardian">
+    <label>Story Description</label><textarea id="storyText" placeholder="Write your story idea here..."></textarea>
     <label>Genre</label>
-    <select id="storyGenre">
-      <option>Fantasy</option><option>Action</option><option>Thriller</option>
-      <option>Horror</option><option>Romance</option><option>Science Fiction</option>
-      <option>Adventure</option><option>Drama</option>
-    </select>
+    <select id="storyGenre"><option>Fantasy</option><option>Action</option><option>Thriller</option><option>Horror</option><option>Romance</option><option>Science Fiction</option><option>Adventure</option><option>Drama</option></select>
     <div class="actions">
       <button class="btn" onclick="saveStory()">Save Story</button>
       <button class="btn secondary" onclick="copyText('storyText')">Copy Story</button>
@@ -407,11 +159,8 @@ textarea{min-height:125px;resize:vertical;line-height:1.6}
   <h1>Scene Generator</h1>
   <p class="description">Divide your story into scenes and prepare visual prompts.</p>
   <div class="panel">
-    <label>Paste Your Story</label>
-    <textarea id="sceneInput" placeholder="Paste your story here..."></textarea>
-    <div class="actions">
-      <button class="btn" onclick="generateScenes()">Generate Scenes</button>
-    </div>
+    <label>Paste Your Story</label><textarea id="sceneInput" placeholder="Paste your story here..."></textarea>
+    <div class="actions"><button class="btn" onclick="generateScenes()">Generate Scenes</button></div>
     <div id="sceneOutput"></div>
   </div>
 </section>
@@ -419,27 +168,52 @@ textarea{min-height:125px;resize:vertical;line-height:1.6}
 <section class="page" id="character">
   <div class="eyebrow">03 / CHARACTER DEVELOPMENT</div>
   <h1>Character Studio</h1>
-  <p class="description">Create a character profile and a detailed character sheet prompt.</p>
+  <p class="description">Upload a character reference and create new scenes while keeping the same visual character as consistently as the model allows.</p>
+
   <div class="panel">
-    <label>Character Name</label>
-    <input id="charName" placeholder="Character name">
-    <label>Age</label>
-    <input id="charAge" placeholder="25 years old">
-    <label>Character Role</label>
-    <input id="charRole" placeholder="Hero, villain, princess...">
-    <label>Appearance</label>
-    <textarea id="charAppearance" placeholder="Face, hair, clothing, body type, eye color..."></textarea>
-    <label>Personality</label>
-    <textarea id="charPersonality" placeholder="Brave, mysterious, intelligent..."></textarea>
-    <div class="actions">
-      <button class="btn" onclick="makeCharacter()">Create Character Sheet Prompt</button>
-    </div>
+    <h2>Step 1 — Character Profile</h2>
+    <label>Character Name</label><input id="charName" placeholder="Character name">
+    <label>Age</label><input id="charAge" placeholder="25 years old">
+    <label>Character Role</label><input id="charRole" placeholder="Hero, villain, princess...">
+    <label>Appearance</label><textarea id="charAppearance" placeholder="Face, hair, clothing, body type, eye color..."></textarea>
+    <label>Personality</label><textarea id="charPersonality" placeholder="Brave, mysterious, intelligent..."></textarea>
+    <div class="actions"><button class="btn secondary" onclick="makeCharacter()">Create Character Prompt</button></div>
     <div id="characterOutput" class="output">Your character prompt will appear here.</div>
-    <div class="actions">
-      <button class="btn secondary" onclick="copyOutput('characterOutput')">Copy Prompt</button>
-      <button class="btn secondary" onclick="useCharacterPrompt()">Send to Image Generator</button>
+    <div class="actions"><button class="btn secondary" onclick="copyOutput('characterOutput')">Copy Character Prompt</button></div>
+  </div>
+
+  <div class="panel">
+    <h2>Step 2 — Upload Character Reference</h2>
+    <p class="description">Upload a clear character image or character sheet. PNG, JPG and WEBP are supported.</p>
+    <div class="upload-box">
+      <label for="charReference">Choose Character Reference Image</label>
+      <input type="file" id="charReference" accept="image/png,image/jpeg,image/webp">
+      <img id="charReferencePreview" class="upload-preview" alt="Character reference preview">
+      <p id="referenceStatus" class="description">No reference image selected.</p>
     </div>
-    <div class="notice">For true identity preservation across generated images, a compatible image-reference AI model and backend are required. This tool currently prepares the character prompt.</div>
+
+    <h2 style="margin-top:25px">Step 3 — Describe Your New Scene</h2>
+    <label>Scene Prompt</label>
+    <textarea id="charScenePrompt" placeholder="The same character walking through a rainy futuristic city at night, cinematic lighting, realistic photography..."></textarea>
+    <label>Output Aspect Ratio</label>
+    <select id="charAspect">
+      <option value="match_input_image">Same as Reference</option>
+      <option value="1:1">Square 1:1</option>
+      <option value="16:9">Landscape 16:9</option>
+      <option value="9:16">Portrait 9:16</option>
+      <option value="4:3">Landscape 4:3</option>
+      <option value="3:4">Portrait 3:4</option>
+    </select>
+    <div class="notice">Tip: For better consistency, describe the new pose, location and action, but avoid changing the character's face, hairstyle and defining features. Results may still vary between generations.</div>
+    <div class="actions">
+      <button class="btn" id="characterGenerateBtn" onclick="generateCharacter()">✨ Generate Character Scene</button>
+    </div>
+    <div id="characterStatus" class="description" style="margin-top:15px"></div>
+    <img id="characterResult" class="preview" style="display:none" alt="Generated character scene">
+    <div id="characterActions" class="actions" style="display:none">
+      <button class="btn" onclick="downloadImage()">Download Image</button>
+      <button class="btn secondary" onclick="saveImage()">Save to Library</button>
+    </div>
   </div>
 </section>
 
@@ -462,14 +236,8 @@ textarea{min-height:125px;resize:vertical;line-height:1.6}
       <option value="oil painting">Oil Painting</option>
     </select>
     <label>Generation Quality</label>
-    <select id="imageSteps">
-      <option value="4">Standard</option>
-      <option value="6">High</option>
-      <option value="8">Maximum</option>
-    </select>
-    <div class="actions">
-      <button class="btn" id="generateBtn" onclick="generateImage()">✨ Generate Image</button>
-    </div>
+    <select id="imageSteps"><option value="4">Standard</option><option value="6">High</option><option value="8">Maximum</option></select>
+    <div class="actions"><button class="btn" id="generateBtn" onclick="generateImage()">✨ Generate Image</button></div>
     <div id="imageStatus" class="description" style="margin-top:15px"></div>
     <img id="imageResult" class="preview" style="display:none" alt="AI generated image">
     <div id="imageActions" class="actions" style="display:none">
@@ -493,14 +261,9 @@ textarea{min-height:125px;resize:vertical;line-height:1.6}
   <div class="eyebrow">COMING SOON</div>
   <h1>More Creative Tools</h1>
   <div class="panel">
-    <h2>AI Video Studio</h2>
-    <p class="description">Generate cinematic videos from scenes and image references.</p>
-    <br>
-    <h2>Voice Studio</h2>
-    <p class="description">Create character voices and film narration.</p>
-    <br>
-    <h2>Film Editor</h2>
-    <p class="description">Organize scenes, audio and video into a complete film.</p>
+    <h2>AI Video Studio</h2><p class="description">Generate cinematic videos from scenes and image references.</p><br>
+    <h2>Voice Studio</h2><p class="description">Create character voices and film narration.</p><br>
+    <h2>Film Editor</h2><p class="description">Organize scenes, audio and video into a complete film.</p>
     <div class="notice">These features are planned, not currently connected to working generation services.</div>
   </div>
 </section>
@@ -511,7 +274,9 @@ textarea{min-height:125px;resize:vertical;line-height:1.6}
 </div>
 
 <script>
-const API_URL = "https://nova-ai-backend.zitband1.workers.dev/generate";
+const API_BASE = "https://nova-ai-backend.zitband1.workers.dev";
+const GENERATE_API = API_BASE + "/generate";
+const CHARACTER_API = API_BASE + "/character";
 
 function showPage(id){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
@@ -532,17 +297,14 @@ function toggleMenu(){
 function copyText(id){
   const value=document.getElementById(id).value;
   if(!value.trim()) return alert("Please enter some text first.");
-  navigator.clipboard.writeText(value).then(()=>alert("Copied!"));
+  navigator.clipboard.writeText(value).then(()=>alert("Copied!")).catch(()=>alert("Could not copy text."));
 }
 function copyOutput(id){
   const value=document.getElementById(id).innerText;
-  navigator.clipboard.writeText(value).then(()=>alert("Prompt copied!"));
+  navigator.clipboard.writeText(value).then(()=>alert("Prompt copied!")).catch(()=>alert("Could not copy text."));
 }
 function saveProject(){
-  const data={
-    name:document.getElementById("projectName").value,
-    idea:document.getElementById("projectIdea").value
-  };
+  const data={name:document.getElementById("projectName").value,idea:document.getElementById("projectIdea").value};
   localStorage.setItem("novaProject",JSON.stringify(data));
   document.getElementById("projectStatus").textContent="Project saved on this browser.";
 }
@@ -575,29 +337,19 @@ function generateScenes(){
   if(!text) return alert("Please paste your story first.");
   const sentences=text.match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[text];
   const chunks=[];
-  for(let i=0;i<sentences.length;i+=2){
-    chunks.push(sentences.slice(i,i+2).join(" ").trim());
-  }
+  for(let i=0;i<sentences.length;i+=2) chunks.push(sentences.slice(i,i+2).join(" ").trim());
   const output=document.getElementById("sceneOutput");
   output.innerHTML="";
   chunks.forEach((scene,i)=>{
-    const card=document.createElement("div");
-    card.className="scene";
-    const heading=document.createElement("h3");
-    heading.textContent="SCENE "+(i+1);
-    const para=document.createElement("p");
-    para.textContent=scene;
-    const btn=document.createElement("button");
-    btn.className="btn secondary";
-    btn.textContent="Use Scene";
+    const card=document.createElement("div");card.className="scene";
+    const heading=document.createElement("h3");heading.textContent="SCENE "+(i+1);
+    const para=document.createElement("p");para.textContent=scene;
+    const btn=document.createElement("button");btn.className="btn secondary";btn.textContent="Use Scene";
     btn.onclick=()=>{
-      document.getElementById("imagePrompt").value=
-        "Cinematic film scene, "+scene+
-        ", realistic details, dramatic lighting, professional cinematography.";
+      document.getElementById("imagePrompt").value="Cinematic film scene, "+scene+", realistic details, dramatic lighting, professional cinematography.";
       showPage("image");
     };
-    card.append(heading,para,btn);
-    output.appendChild(card);
+    card.append(heading,para,btn);output.appendChild(card);
   });
 }
 function makeCharacter(){
@@ -607,9 +359,7 @@ function makeCharacter(){
   const appearance=document.getElementById("charAppearance").value.trim();
   const personality=document.getElementById("charPersonality").value.trim();
   if(!name||!appearance) return alert("Enter character name and appearance.");
-  const prompt=
-`Create a professional character reference sheet for one fictional character.
-
+  const prompt=`Create a professional character reference sheet for one fictional character.
 Character name: ${name}
 Age: ${age}
 Role: ${role}
@@ -620,17 +370,86 @@ Show exactly three full-body views of the SAME character in one clean horizontal
 1. Front view
 2. Side profile
 3. Back view
-
 Maintain identical face, facial structure, hairstyle, clothing, body proportions and colors in all three views. Neutral studio background, realistic anatomy, professional film production character design, consistent lighting. No labels, no text, no watermark.`;
   document.getElementById("characterOutput").textContent=prompt;
+  document.getElementById("charScenePrompt").value=
+    "Create a new cinematic scene featuring the exact same character shown in the reference image. Preserve the character's identity, face, facial features, hairstyle, body proportions and defining appearance. "+appearance+". New scene: ";
 }
-function useCharacterPrompt(){
-  const prompt=document.getElementById("characterOutput").innerText;
-  if(!prompt||prompt.includes("will appear")) return alert("Create a character prompt first.");
-  document.getElementById("imagePrompt").value=prompt;
-  showPage("image");
-}
+
+let referenceDataURI="";
+const referenceInput=document.getElementById("charReference");
+referenceInput.addEventListener("change",()=>{
+  const file=referenceInput.files && referenceInput.files[0];
+  const preview=document.getElementById("charReferencePreview");
+  const status=document.getElementById("referenceStatus");
+  referenceDataURI="";
+  preview.style.display="none";
+  if(!file){status.textContent="No reference image selected.";return;}
+  if(!["image/png","image/jpeg","image/webp"].includes(file.type)){
+    referenceInput.value="";
+    status.textContent="Please select a PNG, JPG or WEBP image.";
+    return;
+  }
+  if(file.size>7*1024*1024){
+    referenceInput.value="";
+    status.textContent="Image is too large. Please choose an image smaller than 7 MB.";
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=()=>{
+    referenceDataURI=reader.result;
+    preview.src=referenceDataURI;
+    preview.style.display="block";
+    status.textContent="Reference image ready: "+file.name;
+  };
+  reader.onerror=()=>{status.textContent="Could not read this image. Please try another file.";};
+  reader.readAsDataURL(file);
+});
+
 let currentImage="";
+async function generateCharacter(){
+  const prompt=document.getElementById("charScenePrompt").value.trim();
+  const btn=document.getElementById("characterGenerateBtn");
+  const status=document.getElementById("characterStatus");
+  const result=document.getElementById("characterResult");
+  const actions=document.getElementById("characterActions");
+
+  if(!referenceDataURI) return alert("Please upload a character reference image first.");
+  if(!prompt) return alert("Please describe the new character scene.");
+
+  btn.disabled=true;
+  btn.textContent="Generating Character...";
+  status.textContent="Your character scene is being generated. Please wait...";
+  result.style.display="none";
+  actions.style.display="none";
+
+  try{
+    const response=await fetch(CHARACTER_API,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        prompt:prompt,
+        referenceImage:referenceDataURI,
+        aspectRatio:document.getElementById("charAspect").value
+      })
+    });
+    const data=await response.json();
+    if(!response.ok) throw new Error(data.error||"Character generation request failed.");
+    if(!data.success||!data.dataURI) throw new Error(data.error||"No character image was returned.");
+
+    currentImage=data.dataURI;
+    result.src=currentImage;
+    result.style.display="block";
+    actions.style.display="flex";
+    status.textContent="Your character scene is ready!";
+  }catch(error){
+    status.textContent="Could not generate character: "+error.message;
+  }finally{
+    btn.disabled=false;
+    btn.textContent="✨ Generate Character Scene";
+  }
+}
+
 async function generateImage(){
   const prompt=document.getElementById("imagePrompt").value.trim();
   if(!prompt) return alert("Please describe your image first.");
@@ -641,38 +460,31 @@ async function generateImage(){
   const status=document.getElementById("imageStatus");
   const result=document.getElementById("imageResult");
   const actions=document.getElementById("imageActions");
-  btn.disabled=true;
-  btn.textContent="Generating...";
+  btn.disabled=true;btn.textContent="Generating...";
   status.textContent="Your image is being generated. Please wait...";
-  result.style.display="none";
-  actions.style.display="none";
+  result.style.display="none";actions.style.display="none";
   try{
-    const response=await fetch(API_URL,{
+    const response=await fetch(GENERATE_API,{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({prompt:finalPrompt,steps:steps})
     });
     const data=await response.json();
     if(!response.ok) throw new Error(data.error||"Image service request failed.");
-    if(!data.success||!data.dataURI) throw new Error(data.error||"No image was returned by the service.");
+    if(!data.success||!data.dataURI) throw new Error(data.error||"No image was returned.");
     currentImage=data.dataURI;
-    result.src=currentImage;
-    result.style.display="block";
-    actions.style.display="flex";
-    status.textContent="Your image is ready!";
+    result.src=currentImage;result.style.display="block";
+    actions.style.display="flex";status.textContent="Your image is ready!";
   }catch(error){
     status.textContent="Could not generate image: "+error.message;
   }finally{
-    btn.disabled=false;
-    btn.textContent="✨ Generate Image";
+    btn.disabled=false;btn.textContent="✨ Generate Image";
   }
 }
 function downloadImage(){
   if(!currentImage) return;
   const a=document.createElement("a");
-  a.href=currentImage;
-  a.download="nova-ai-image.png";
-  a.click();
+  a.href=currentImage;a.download="nova-ai-image.png";a.click();
 }
 function saveImage(){
   if(!currentImage) return;
@@ -682,34 +494,23 @@ function saveImage(){
     localStorage.setItem("novaGallery",JSON.stringify(images.slice(0,12)));
     alert("Image saved to your library!");
     renderGallery();
-  }catch(e){
-    alert("Browser storage is full. Download your image instead.");
-  }
+  }catch(e){alert("Browser storage is full. Download your image instead.");}
 }
 function renderGallery(){
   const gallery=document.getElementById("gallery");
   const empty=document.getElementById("emptyLibrary");
   gallery.innerHTML="";
   let images=[];
-  try{images=JSON.parse(localStorage.getItem("novaGallery")||"[]")}catch(e){}
+  try{images=JSON.parse(localStorage.getItem("novaGallery")||"[]");}catch(e){}
   empty.style.display=images.length?"none":"block";
   images.forEach((item,index)=>{
-    const wrap=document.createElement("div");
-    wrap.className="gallery-item";
-    const img=document.createElement("img");
-    img.src=item.src;
-    img.alt="Saved AI creation";
-    const btn=document.createElement("button");
-    btn.className="btn secondary";
-    btn.textContent="Download";
+    const wrap=document.createElement("div");wrap.className="gallery-item";
+    const img=document.createElement("img");img.src=item.src;img.alt="Saved AI creation";
+    const btn=document.createElement("button");btn.className="btn secondary";btn.textContent="Download";
     btn.onclick=()=>{
-      const a=document.createElement("a");
-      a.href=item.src;
-      a.download="nova-image-"+(index+1)+".png";
-      a.click();
+      const a=document.createElement("a");a.href=item.src;a.download="nova-image-"+(index+1)+".png";a.click();
     };
-    wrap.append(img,btn);
-    gallery.appendChild(wrap);
+    wrap.append(img,btn);gallery.appendChild(wrap);
   });
 }
 loadProject();
