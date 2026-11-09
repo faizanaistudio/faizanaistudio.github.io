@@ -390,6 +390,13 @@ function setAuthMode(mode){
 }
 function toggleProfileMenu(){document.getElementById("profileMenu").classList.toggle("open");}
 function closeProfileMenu(){document.getElementById("profileMenu").classList.remove("open");}
+// Close the account menu whenever the user clicks anywhere outside it.
+document.addEventListener("click",event=>{
+  const menu=document.getElementById("profileMenu");
+  const avatar=document.getElementById("userAvatar");
+  if(menu?.classList.contains("open")&&!menu.contains(event.target)&&!avatar.contains(event.target))closeProfileMenu();
+});
+document.addEventListener("keydown",event=>{if(event.key==="Escape")closeProfileMenu();});
 function getUserInitial(user){
   const label=(user?.user_metadata?.full_name||user?.user_metadata?.name||user?.email||"N").trim();
   return (label.includes("@")?label.split("@")[0]:label).charAt(0).toUpperCase()||"N";
